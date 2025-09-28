@@ -1,0 +1,200 @@
+{% extends "base.html" %}
+
+{% block title %}Ajouter un projet{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="mb-8">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900">Ajouter un projet</h1>
+                    <p class="mt-2 text-gray-600">Partagez vos réalisations avec le monde</p>
+                </div>
+                <a href="{{ url_for('portfolio.projects') }}" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    Retour aux projets
+                </a>
+            </div>
+        </div>
+
+        <!-- Formulaire principal -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2">
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                    <div class="px-6 py-4 bg-gradient-to-r from-blue-500 to-purple-600">
+                        <h2 class="text-xl font-semibold text-white">
+                            <i class="fas fa-plus-circle mr-2"></i>
+                            Nouveau projet
+                        </h2>
+                    </div>
+                    
+                    <form method="POST" enctype="multipart/form-data" class="p-6 space-y-6">
+                        {{ form.hidden_tag() }}
+                        
+                        <!-- Titre du projet -->
+                        <div>
+                            {{ form.title.label(class="block text-sm font-medium text-gray-700 mb-2") }}
+                            {{ form.title(class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors", placeholder="Mon super projet") }}
+                            {% if form.title.errors %}
+                                <div class="mt-2 text-red-600 text-sm">
+                                    {% for error in form.title.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Description -->
+                        <div>
+                            {{ form.description.label(class="block text-sm font-medium text-gray-700 mb-2") }}
+                            {{ form.description(class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors", rows="4", placeholder="Décrivez votre projet, les défis relevés et les fonctionnalités...") }}
+                            {% if form.description.errors %}
+                                <div class="mt-2 text-red-600 text-sm">
+                                    {% for error in form.description.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Technologies -->
+                        <div>
+                            {{ form.technologies.label(class="block text-sm font-medium text-gray-700 mb-2") }}
+                            {{ form.technologies(class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors", placeholder="Python, Flask, JavaScript, React, TailwindCSS...") }}
+                            <p class="mt-2 text-sm text-gray-500">
+                                <i class="fas fa-info-circle mr-1"></i>
+                                Séparez les technologies par des virgules
+                            </p>
+                            {% if form.technologies.errors %}
+                                <div class="mt-2 text-red-600 text-sm">
+                                    {% for error in form.technologies.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- URLs -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                {{ form.github_url.label(class="block text-sm font-medium text-gray-700 mb-2") }}
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fab fa-github text-gray-400"></i>
+                                    </div>
+                                    {{ form.github_url(class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors", placeholder="https://github.com/username/project") }}
+                                </div>
+                                {% if form.github_url.errors %}
+                                    <div class="mt-2 text-red-600 text-sm">
+                                        {% for error in form.github_url.errors %}
+                                            <p>{{ error }}</p>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                            
+                            <div>
+                                {{ form.demo_url.label(class="block text-sm font-medium text-gray-700 mb-2") }}
+                                <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                        <i class="fas fa-external-link-alt text-gray-400"></i>
+                                    </div>
+                                    {{ form.demo_url(class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors", placeholder="https://demo.example.com") }}
+                                </div>
+                                {% if form.demo_url.errors %}
+                                    <div class="mt-2 text-red-600 text-sm">
+                                        {% for error in form.demo_url.errors %}
+                                            <p>{{ error }}</p>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                        <!-- Projet vedette -->
+                        <div class="flex items-center">
+                            {{ form.featured(class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded") }}
+                            {{ form.featured.label(class="ml-3 block text-sm font-medium text-gray-700") }}
+                        </div>
+                        
+                        <!-- Boutons d'action -->
+                        <div class="flex justify-end space-x-4 pt-6 border-t border-gray-200">
+                            <a href="{{ url_for('portfolio.projects') }}" class="px-6 py-3 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">
+                                <i class="fas fa-times mr-2"></i>
+                                Annuler
+                            </a>
+                            {{ form.submit(class="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-200 font-medium") }}
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Sidebar avec conseils -->
+            <div class="lg:col-span-1">
+                <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+                    <div class="px-6 py-4 bg-gradient-to-r from-green-500 to-teal-600">
+                        <h3 class="text-lg font-semibold text-white">
+                            <i class="fas fa-lightbulb mr-2"></i>
+                            Conseils
+                        </h3>
+                    </div>
+                    
+                    <div class="p-6 space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-star text-yellow-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-medium text-gray-900">Titre accrocheur</h4>
+                                <p class="text-sm text-gray-600">Utilisez un titre descriptif et professionnel</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-file-alt text-blue-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-medium text-gray-900">Description détaillée</h4>
+                                <p class="text-sm text-gray-600">Expliquez le problème résolu et les fonctionnalités</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-code text-purple-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-medium text-gray-900">Technologies</h4>
+                                <p class="text-sm text-gray-600">Listez toutes les technologies utilisées</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-link text-green-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-medium text-gray-900">Liens utiles</h4>
+                                <p class="text-sm text-gray-600">Ajoutez des liens vers le code et la démo</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3">
+                            <div class="flex-shrink-0">
+                                <i class="fas fa-heart text-red-500"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-sm font-medium text-gray-900">Projet vedette</h4>
+                                <p class="text-sm text-gray-600">Marquez vos meilleurs projets</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

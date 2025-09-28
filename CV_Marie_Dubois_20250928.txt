@@ -1,0 +1,63 @@
+Marie Dubois
+Développeuse Full Stack Senior
+
+CONTACT
+📧 marie.dubois@email.com
+📱 +33 6 12 34 56 78
+🌐 https://mariedubois.dev
+📍 Paris, France
+💼 https://linkedin.com/in/marie-dubois
+🐙 https://github.com/mariedubois
+
+PROFIL
+Développeuse Full Stack passionnée par les technologies web modernes. 
+5+ années d'expérience dans le développement d'applications web complexes.
+Spécialisée en React, Node.js et Python avec une expertise en architecture 
+microservices et optimisation des performances.
+
+EXPÉRIENCE PROFESSIONNELLE
+
+Développeuse Full Stack Senior - TechCorp Solutions (2022 - Présent)
+• Développement d'applications web complexes avec React et Node.js
+• Leadership d'une équipe de 3 développeurs
+• Mise en place d'architecture microservices
+• Amélioration des performances de 40%
+
+Développeuse Frontend - StartupX (2020 - 2021)
+• Développement d'interfaces utilisateur avec React et Vue.js
+• Collaboration avec les designers UX/UI
+• Optimisation des performances et accessibilité
+
+Développeuse Junior - WebAgency (2019 - 2020)
+• Développement de sites web avec HTML, CSS, JavaScript
+• Maintenance et évolution de sites existants
+
+FORMATION
+
+Master en Informatique - Université Paris-Saclay (2017 - 2019)
+Spécialisation en développement web et intelligence artificielle
+
+Licence Informatique - Université Aix-Marseille (2014 - 2017)
+Formation générale en informatique
+
+COMPÉTENCES TECHNIQUES
+
+Langages: JavaScript (90%), Python (85%)
+Frontend: React (90%), Vue.js (80%), HTML/CSS
+Backend: Node.js (85%), Express.js (80%), Flask (75%)
+Bases de données: MongoDB (80%), PostgreSQL (75%)
+Outils: Git (85%), Docker (70%), AWS (65%)
+
+PROJETS NOTABLES
+
+E-commerce React/Node.js
+Plateforme e-commerce complète avec panier et paiement
+Technologies: React, Node.js, MongoDB, Stripe
+
+API REST Python/Flask
+API complète avec authentification JWT et documentation
+Technologies: Python, Flask, SQLAlchemy, Swagger
+
+Dashboard Analytics Vue.js
+Tableau de bord analytique en temps réel
+Technologies: Vue.js, Chart.js, WebSocket, PostgreSQL

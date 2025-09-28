@@ -1,0 +1,91 @@
+
+CURRICULUM VITAE
+
+Jean DUPONT
+Développeur Full Stack Senior
+
+INFORMATIONS PERSONNELLES
+Email: jean.dupont@example.com
+Téléphone: +33 6 12 34 56 78
+Localisation: Paris, France
+LinkedIn: https://linkedin.com/in/jeandupont
+GitHub: https://github.com/jeandupont
+Site web: https://jeandupont.dev
+
+EXPÉRIENCE PROFESSIONNELLE
+
+Développeur Full Stack Senior - TechCorp (2022 - Présent)
+• Développement d'applications web et mobile
+• Architecture de microservices
+• Mentoring d'équipes junior
+• Technologies: Python, React, Node.js, PostgreSQL
+
+Développeur Frontend - StartupXYZ (2020 - 2021)
+• Développement d'interfaces utilisateur modernes
+• Intégration avec APIs REST
+• Technologies: React, Vue.js, JavaScript
+
+FORMATION
+
+Master en Informatique - Université de Paris (2018 - 2020)
+• Spécialisation développement web et IA
+• Projet de fin d'études: Application e-commerce
+
+Licence Informatique - Université de Lyon (2015 - 2018)
+• Formation générale en informatique
+• Focus sur la programmation
+
+COMPÉTENCES TECHNIQUES
+
+Langages de programmation:
+• Python (Expert)
+• JavaScript (Expert)
+• HTML/CSS (Avancé)
+• SQL (Avancé)
+
+Frameworks et bibliothèques:
+• React (Avancé)
+• Vue.js (Avancé)
+• Node.js (Avancé)
+• Flask (Expert)
+• Django (Intermédiaire)
+
+Bases de données:
+• PostgreSQL (Avancé)
+• MongoDB (Intermédiaire)
+• Redis (Intermédiaire)
+
+Outils et technologies:
+• Git (Expert)
+• Docker (Avancé)
+• AWS (Intermédiaire)
+• Linux (Avancé)
+
+PROJETS NOTABLES
+
+Application E-commerce (2023)
+• Plateforme complète avec panier et paiement
+• Technologies: React, Node.js, MongoDB, Stripe
+• GitHub: https://github.com/jeandupont/ecommerce-app
+
+API REST (2022)
+• API pour gestion d'utilisateurs avec JWT
+• Technologies: Python, Flask, SQLAlchemy
+• GitHub: https://github.com/jeandupont/user-api
+
+Dashboard Analytics (2021)
+• Tableau de bord interactif pour visualisation
+• Technologies: Vue.js, D3.js, Python, PostgreSQL
+• GitHub: https://github.com/jeandupont/analytics-dashboard
+
+LANGUES
+• Français (Natif)
+• Anglais (Courant)
+• Espagnol (Intermédiaire)
+
+CENTRES D'INTÉRÊT
+• Développement open source
+• Veille technologique
+• Mentorat
+• Sport (Course à pied, Natation)
+        

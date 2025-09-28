@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}Mes Formations - Portfolio Builder{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="flex justify-between items-center mb-8">
+        <h1 class="text-3xl font-bold text-gray-900">Mes Formations</h1>
+        <a href="{{ url_for('portfolio.add_education') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
+            <i class="fas fa-plus mr-2"></i>Ajouter une formation
+        </a>
+    </div>
+
+    {% if education %}
+        <div class="space-y-6">
+            {% for edu in education %}
+            <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-900">{{ edu.degree }}</h3>
+                        <p class="text-lg text-gray-700">{{ edu.institution }}</p>
+                        {% if edu.location %}
+                            <p class="text-gray-500"><i class="fas fa-map-marker-alt mr-1"></i>{{ edu.location }}</p>
+                        {% endif %}
+                    </div>
+                    {% if edu.current %}
+                        <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">En cours</span>
+                    {% endif %}
+                </div>
+                
+                <div class="mb-4">
+                    <p class="text-gray-600">
+                        <i class="fas fa-calendar mr-2"></i>
+                        {{ edu.start_date.strftime('%B %Y') }} - 
+                        {% if edu.current %}
+                            En cours
+                        {% else %}
+                            {{ edu.end_date.strftime('%B %Y') }}
+                        {% endif %}
+                    </p>
+                </div>
+                
+                {% if edu.description %}
+                    <p class="text-gray-700 mb-4">{{ edu.description }}</p>
+                {% endif %}
+                
+                <div class="flex space-x-2">
+                    <a href="{{ url_for('portfolio.edit_education', edu_id=edu.id) }}" class="text-blue-600 hover:text-blue-800">
+                        <i class="fas fa-edit"></i> Modifier
+                    </a>
+                    <form method="POST" action="{{ url_for('portfolio.delete_education', edu_id=edu.id) }}" class="inline" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette formation ?')">
+                        <button type="submit" class="text-red-600 hover:text-red-800">
+                            <i class="fas fa-trash"></i> Supprimer
+                        </button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="text-center py-12">
+            <i class="fas fa-graduation-cap text-6xl text-gray-300 mb-4"></i>
+            <h3 class="text-xl font-semibold text-gray-600 mb-2">Aucune formation pour le moment</h3>
+            <p class="text-gray-500 mb-6">Ajoutez vos formations et diplômes pour enrichir votre portfolio.</p>
+            <a href="{{ url_for('portfolio.add_education') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors">
+                <i class="fas fa-plus mr-2"></i>Ajouter une formation
+            </a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}À propos - Portfolio Builder{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center mb-12">
+        <h1 class="text-4xl font-bold text-gray-900 mb-4">À propos de Portfolio Builder</h1>
+        <p class="text-xl text-gray-600">Une solution complète pour créer et partager des portfolios professionnels</p>
+    </div>
+    
+    <div class="prose max-w-none">
+        <p class="text-lg text-gray-700 mb-6">
+            Portfolio Builder est une application web moderne qui permet aux candidats de créer, 
+            personnaliser et partager leur portfolio professionnel via un lien unique, 
+            accessible par les recruteurs.
+        </p>
+        
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">Notre Mission</h2>
+        <p class="text-gray-700 mb-6">
+            Simplifier la création de portfolios professionnels et faciliter la mise en relation 
+            entre candidats et recruteurs grâce à une interface intuitive et des fonctionnalités avancées.
+        </p>
+        
+        <h2 class="text-2xl font-bold text-gray-900 mb-4">Fonctionnalités</h2>
+        <ul class="list-disc list-inside text-gray-700 mb-6 space-y-2">
+            <li>Création de portfolio personnalisé</li>
+            <li>Gestion des projets et expériences</li>
+            <li>Upload de CV PDF</li>
+            <li>Thèmes et personnalisation</li>
+            <li>Partage via lien unique</li>
+            <li>Interface responsive</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

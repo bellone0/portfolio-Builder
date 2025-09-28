@@ -1,0 +1,217 @@
+{% extends "base.html" %}
+
+{% block title %}Analytics - Portfolio Builder{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-50 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Header -->
+        <div class="mb-8">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900">Analytics du portfolio</h1>
+                    <p class="mt-2 text-gray-600">Suivez les statistiques et les visiteurs de votre portfolio</p>
+                </div>
+                <a href="{{ url_for('portfolio.dashboard') }}" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50">
+                    <i class="fas fa-arrow-left mr-2"></i>
+                    Retour au tableau de bord
+                </a>
+            </div>
+        </div>
+
+        <!-- Statistiques principales -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-eye text-blue-600 text-2xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-500">Vues totales</p>
+                        <p class="text-2xl font-semibold text-gray-900">{{ portfolio.views_count }}</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-users text-green-600 text-2xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-500">Visiteurs uniques</p>
+                        <p class="text-2xl font-semibold text-gray-900">{{ visitors|length }}</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-calendar text-purple-600 text-2xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-500">Dernière vue</p>
+                        <p class="text-2xl font-semibold text-gray-900">
+                            {% if portfolio.last_viewed %}
+                                {{ portfolio.last_viewed.strftime('%d/%m') }}
+                            {% else %}
+                                Jamais
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow p-6">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <i class="fas fa-link text-orange-600 text-2xl"></i>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-500">Lien public</p>
+                        <p class="text-sm font-semibold text-gray-900 break-all">
+                            <a href="/p/{{ portfolio.public_url }}" target="_blank" class="text-blue-600 hover:text-blue-700">
+                                /p/{{ portfolio.public_url }}
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Détails des visiteurs -->
+        <div class="bg-white shadow-lg rounded-lg">
+            <div class="px-6 py-4 border-b border-gray-200">
+                <h2 class="text-xl font-semibold text-gray-900">Détails des visiteurs</h2>
+                <p class="text-sm text-gray-600 mt-1">Informations sur les personnes qui ont visité votre portfolio</p>
+            </div>
+            
+            {% if visitors %}
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date/Heure</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Adresse IP</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Navigateur</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Référent</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            {% for visitor in visitors %}
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        {{ visitor.timestamp[:19].replace('T', ' ') }}
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                        {{ visitor.ip }}
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-900">
+                                        <div class="max-w-xs truncate" title="{{ visitor.user_agent }}">
+                                            {{ visitor.user_agent[:50] }}{% if visitor.user_agent|length > 50 %}...{% endif %}
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 text-sm text-gray-900">
+                                        {% if visitor.referrer %}
+                                            <a href="{{ visitor.referrer }}" target="_blank" class="text-blue-600 hover:text-blue-700">
+                                                {{ visitor.referrer[:30] }}{% if visitor.referrer|length > 30 %}...{% endif %}
+                                            </a>
+                                        {% else %}
+                                            <span class="text-gray-400">Direct</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="text-center py-12">
+                    <i class="fas fa-chart-line text-6xl text-gray-300 mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-600 mb-2">Aucun visiteur enregistré</h3>
+                    <p class="text-gray-500 mb-6">Les informations des visiteurs apparaîtront ici une fois que quelqu'un aura visité votre portfolio.</p>
+                    <div class="space-y-2 text-sm text-gray-400">
+                        <p>💡 Conseils pour attirer des visiteurs :</p>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li>Partagez votre lien sur les réseaux sociaux</li>
+                            <li>Ajoutez votre lien dans votre signature email</li>
+                            <li>Incluez votre portfolio dans vos candidatures</li>
+                        </ul>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+
+        <!-- Actions rapides -->
+        <div class="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-6">
+            <h4 class="text-lg font-semibold text-blue-900 mb-4">
+                <i class="fas fa-share-alt mr-2"></i>Partager votre portfolio
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-medium text-blue-800 mb-2">Lien direct</label>
+                    <div class="flex">
+                        <input type="text" 
+                               value="{{ request.url_root }}p/{{ portfolio.public_url }}" 
+                               readonly 
+                               class="flex-1 px-3 py-2 border border-blue-300 rounded-l-lg bg-white text-sm">
+                        <button onclick="copyToClipboard('{{ request.url_root }}p/{{ portfolio.public_url }}')" 
+                                class="px-4 py-2 bg-blue-600 text-white rounded-r-lg hover:bg-blue-700 transition-colors">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-blue-800 mb-2">Actions</label>
+                    <div class="flex space-x-2">
+                        <a href="/p/{{ portfolio.public_url }}" 
+                           target="_blank"
+                           class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                            <i class="fas fa-eye mr-2"></i>
+                            Voir le portfolio
+                        </a>
+                        <button onclick="sharePortfolio()" 
+                                class="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
+                            <i class="fas fa-share mr-2"></i>
+                            Partager
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(function() {
+        // Afficher une notification de succès
+        const button = event.target.closest('button');
+        const originalHTML = button.innerHTML;
+        button.innerHTML = '<i class="fas fa-check"></i>';
+        button.classList.add('bg-green-600');
+        button.classList.remove('bg-blue-600');
+        
+        setTimeout(() => {
+            button.innerHTML = originalHTML;
+            button.classList.remove('bg-green-600');
+            button.classList.add('bg-blue-600');
+        }, 2000);
+    });
+}
+
+function sharePortfolio() {
+    if (navigator.share) {
+        navigator.share({
+            title: 'Mon Portfolio - {{ portfolio.user.get_full_name() }}',
+            text: 'Découvrez mon portfolio professionnel',
+            url: '{{ request.url_root }}p/{{ portfolio.public_url }}'
+        });
+    } else {
+        // Fallback pour les navigateurs qui ne supportent pas l'API Web Share
+        copyToClipboard('{{ request.url_root }}p/{{ portfolio.public_url }}');
+    }
+}
+</script>
+{% endblock %}

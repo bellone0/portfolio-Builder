@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Mes Projets - Portfolio Builder{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="flex justify-between items-center mb-8">
+        <h1 class="text-3xl font-bold text-gray-900">Mes Projets</h1>
+        <a href="{{ url_for('portfolio.add_project') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
+            <i class="fas fa-plus mr-2"></i>Ajouter un projet
+        </a>
+    </div>
+
+    {% if projects %}
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% for project in projects %}
+            <div class="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-semibold text-gray-900">{{ project.title }}</h3>
+                    {% if project.featured %}
+                        <span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded-full">Mis en avant</span>
+                    {% endif %}
+                </div>
+                
+                <p class="text-gray-600 mb-4">{{ project.description[:150] }}{% if project.description|length > 150 %}...{% endif %}</p>
+                
+                {% if project.technologies %}
+                    <div class="mb-4">
+                        {% for tech in project.get_technologies_list() %}
+                            <span class="inline-block bg-gray-100 text-gray-700 text-sm px-2 py-1 rounded mr-2 mb-2">{{ tech }}</span>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                
+                <div class="flex space-x-2 mb-4">
+                    {% if project.github_url %}
+                        <a href="{{ project.github_url }}" target="_blank" class="text-gray-600 hover:text-gray-900">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                    {% endif %}
+                    {% if project.demo_url %}
+                        <a href="{{ project.demo_url }}" target="_blank" class="text-gray-600 hover:text-gray-900">
+                            <i class="fas fa-external-link-alt"></i> Démo
+                        </a>
+                    {% endif %}
+                </div>
+                
+                <div class="flex space-x-2">
+                    <a href="{{ url_for('portfolio.edit_project', project_id=project.id) }}" class="text-blue-600 hover:text-blue-800">
+                        <i class="fas fa-edit"></i> Modifier
+                    </a>
+                    <form method="POST" action="{{ url_for('portfolio.delete_project', project_id=project.id) }}" class="inline" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce projet ?')">
+                        <button type="submit" class="text-red-600 hover:text-red-800">
+                            <i class="fas fa-trash"></i> Supprimer
+                        </button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="text-center py-12">
+            <i class="fas fa-folder-open text-6xl text-gray-300 mb-4"></i>
+            <h3 class="text-xl font-semibold text-gray-600 mb-2">Aucun projet pour le moment</h3>
+            <p class="text-gray-500 mb-6">Commencez par ajouter votre premier projet pour enrichir votre portfolio.</p>
+            <a href="{{ url_for('portfolio.add_project') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors">
+                <i class="fas fa-plus mr-2"></i>Ajouter un projet
+            </a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Builder - Créez votre portfolio professionnel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="/" class="flex items-center space-x-2">
+                        <i class="fas fa-briefcase text-blue-600 text-2xl"></i>
+                        <span class="text-xl font-bold text-gray-900">Portfolio Builder</span>
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="/auth/login" class="text-gray-700 hover:text-blue-600 transition duration-200">
+                        <i class="fas fa-sign-in-alt mr-1"></i>
+                        Se connecter
+                    </a>
+                    <a href="/auth/register" class="bg-blue-600 text-white hover:bg-blue-700 font-medium py-2 px-4 rounded-lg transition duration-200">
+                        <i class="fas fa-user-plus mr-1"></i>
+                        S'inscrire
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                    Créez votre portfolio professionnel
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 text-blue-100">
+                    Montrez vos compétences, projets et expériences avec un portfolio personnalisé et partageable
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="/auth/register" class="bg-white text-blue-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg text-lg transition duration-200">
+                        <i class="fas fa-rocket mr-2"></i>
+                        Commencer gratuitement
+                    </a>
+                    <a href="/p/demo-portfolio" class="border-2 border-white text-white hover:bg-white hover:text-blue-600 font-semibold py-3 px-8 rounded-lg text-lg transition duration-200">
+                        <i class="fas fa-eye mr-2"></i>
+                        Voir la démo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                    Pourquoi choisir Portfolio Builder ?
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Une solution complète pour créer, personnaliser et partager votre portfolio professionnel
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="text-center p-6 rounded-lg shadow-lg">
+                    <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-paint-brush text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Personnalisation complète</h3>
+                    <p class="text-gray-600">
+                        Choisissez parmi plusieurs thèmes, couleurs et mises en page pour créer un portfolio unique.
+                    </p>
+                </div>
+                
+                <div class="text-center p-6 rounded-lg shadow-lg">
+                    <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-share-alt text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Partage facile</h3>
+                    <p class="text-gray-600">
+                        Générez un lien unique pour partager votre portfolio avec les recruteurs en un clic.
+                    </p>
+                </div>
+                
+                <div class="text-center p-6 rounded-lg shadow-lg">
+                    <div class="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-mobile-alt text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">Responsive design</h3>
+                    <p class="text-gray-600">
+                        Votre portfolio s'adapte parfaitement à tous les écrans, des mobiles aux ordinateurs.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-blue-600 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                Prêt à créer votre portfolio ?
+            </h2>
+            <p class="text-xl mb-8 text-blue-100">
+                Rejoignez des milliers de professionnels qui ont déjà créé leur portfolio avec nous.
+            </p>
+            <a href="/auth/register" class="bg-white text-blue-600 hover:bg-gray-100 font-semibold py-3 px-8 rounded-lg text-lg transition duration-200 inline-block">
+                <i class="fas fa-rocket mr-2"></i>
+                Commencer maintenant
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-gray-400">
+                &copy; 2024 Portfolio Builder. Tous droits réservés.
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

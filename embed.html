@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+
+{% block title %}{{ portfolio.user.get_full_name() }} - Portfolio{% endblock %}
+
+{% block content %}
+<div class="portfolio-embed">
+    <div class="container-fluid">
+        <!-- En-tête du portfolio -->
+        <div class="row">
+            <div class="col-12">
+                <div class="portfolio-header text-center py-4">
+                    {% if portfolio.profile_image %}
+                        <img src="{{ portfolio.profile_image }}" alt="Photo de profil" class="profile-image mb-3">
+                    {% endif %}
+                    <h1>{{ portfolio.user.get_full_name() }}</h1>
+                    {% if portfolio.bio %}
+                        <p class="lead">{{ portfolio.bio }}</p>
+                    {% endif %}
+                    
+                    <div class="contact-info">
+                        {% if portfolio.location %}
+                            <span class="badge bg-secondary me-2">{{ portfolio.location }}</span>
+                        {% endif %}
+                        {% if portfolio.phone %}
+                            <span class="badge bg-info me-2">{{ portfolio.phone }}</span>
+                        {% endif %}
+                        {% if portfolio.website %}
+                            <a href="{{ portfolio.website }}" class="badge bg-primary me-2" target="_blank">Site web</a>
+                        {% endif %}
+                        {% if portfolio.linkedin %}
+                            <a href="{{ portfolio.linkedin }}" class="badge bg-primary me-2" target="_blank">LinkedIn</a>
+                        {% endif %}
+                        {% if portfolio.github %}
+                            <a href="{{ portfolio.github }}" class="badge bg-dark me-2" target="_blank">GitHub</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projets -->
+        {% if projects %}
+        <div class="row">
+            <div class="col-12">
+                <h2>Projets</h2>
+                <div class="row">
+                    {% for project in projects %}
+                    <div class="col-md-6 mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ project.title }}</h5>
+                                <p class="card-text">{{ project.description }}</p>
+                                {% if project.technologies %}
+                                    {% set tech_list = project.technologies|from_json %}
+                                    <div class="mb-2">
+                                        {% for tech in tech_list %}
+                                            <span class="badge bg-secondary me-1">{{ tech }}</span>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                                <div class="project-links">
+                                    {% if project.github_url %}
+                                        <a href="{{ project.github_url }}" class="btn btn-outline-dark btn-sm me-2" target="_blank">GitHub</a>
+                                    {% endif %}
+                                    {% if project.demo_url %}
+                                        <a href="{{ project.demo_url }}" class="btn btn-primary btn-sm" target="_blank">Démo</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Expériences -->
+        {% if experiences %}
+        <div class="row">
+            <div class="col-12">
+                <h2>Expériences</h2>
+                {% for exp in experiences %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ exp.title }} - {{ exp.company }}</h5>
+                        <p class="card-text">
+                            <strong>{{ exp.start_date.strftime('%B %Y') if exp.start_date else 'Date de début' }}</strong>
+                            {% if exp.current %}
+                                - <span class="badge bg-success">En cours</span>
+                            {% elif exp.end_date %}
+                                - {{ exp.end_date.strftime('%B %Y') }}
+                            {% endif %}
+                            {% if exp.location %}
+                                <br><small class="text-muted">{{ exp.location }}</small>
+                            {% endif %}
+                        </p>
+                        {% if exp.description %}
+                            <p class="card-text">{{ exp.description }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Formation -->
+        {% if education %}
+        <div class="row">
+            <div class="col-12">
+                <h2>Formation</h2>
+                {% for edu in education %}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ edu.degree }} - {{ edu.institution }}</h5>
+                        <p class="card-text">
+                            <strong>{{ edu.start_date.strftime('%B %Y') if edu.start_date else 'Date de début' }}</strong>
+                            {% if edu.current %}
+                                - <span class="badge bg-success">En cours</span>
+                            {% elif edu.end_date %}
+                                - {{ edu.end_date.strftime('%B %Y') }}
+                            {% endif %}
+                            {% if edu.location %}
+                                <br><small class="text-muted">{{ edu.location }}</small>
+                            {% endif %}
+                        </p>
+                        {% if edu.description %}
+                            <p class="card-text">{{ edu.description }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- Compétences -->
+        {% if skills_by_category %}
+        <div class="row">
+            <div class="col-12">
+                <h2>Compétences</h2>
+                {% for category, skills in skills_by_category.items() %}
+                <div class="mb-4">
+                    <h4>{{ category }}</h4>
+                    <div class="row">
+                        {% for skill in skills %}
+                        <div class="col-md-4 mb-2">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span>{{ skill.name }}</span>
+                                <div class="progress" style="width: 100px;">
+                                    <div class="progress-bar" role="progressbar" style="width: {{ skill.level }}%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- CV -->
+        {% if portfolio.cv_url %}
+        <div class="row">
+            <div class="col-12 text-center">
+                <a href="{{ url_for('public.download_cv', public_url=portfolio.public_url) }}" class="btn btn-primary btn-lg">
+                    Télécharger le CV
+                </a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<style>
+.portfolio-embed {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f8f9fa;
+    min-height: 100vh;
+}
+
+.profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.contact-info {
+    margin-top: 1rem;
+}
+
+.project-links {
+    margin-top: 1rem;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+}
+
+.progress {
+    height: 8px;
+}
+</style>
+{% endblock %}

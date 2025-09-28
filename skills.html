@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}Mes Compétences - Portfolio Builder{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="flex justify-between items-center mb-8">
+        <h1 class="text-3xl font-bold text-gray-900">Mes Compétences</h1>
+        <a href="{{ url_for('portfolio.add_skill') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors">
+            <i class="fas fa-plus mr-2"></i>Ajouter une compétence
+        </a>
+    </div>
+
+    {% if skills %}
+        <div class="space-y-8">
+            {% for category in skills|groupby('category') %}
+            <div>
+                <h2 class="text-2xl font-semibold text-gray-800 mb-4">{{ category.grouper }}</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    {% for skill in category.list %}
+                    <div class="bg-white rounded-lg shadow-md p-4 border border-gray-200">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-lg font-medium text-gray-900">{{ skill.name }}</h3>
+                            <span class="text-sm text-gray-500">{{ skill.level }}</span>
+                        </div>
+                        
+                        <div class="w-full bg-gray-200 rounded-full h-2 mb-4">
+                            <div class="bg-blue-600 h-2 rounded-full" style="width: 
+                                {% if skill.level == 'Débutant' %}25%
+                                {% elif skill.level == 'Intermédiaire' %}50%
+                                {% elif skill.level == 'Avancé' %}75%
+                                {% elif skill.level == 'Expert' %}100%
+                                {% endif %}
+                            "></div>
+                        </div>
+                        
+                        <div class="flex space-x-2">
+                            <a href="{{ url_for('portfolio.edit_skill', skill_id=skill.id) }}" class="text-blue-600 hover:text-blue-800 text-sm">
+                                <i class="fas fa-edit"></i> Modifier
+                            </a>
+                            <form method="POST" action="{{ url_for('portfolio.delete_skill', skill_id=skill.id) }}" class="inline" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cette compétence ?')">
+                                <button type="submit" class="text-red-600 hover:text-red-800 text-sm">
+                                    <i class="fas fa-trash"></i> Supprimer
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="text-center py-12">
+            <i class="fas fa-tools text-6xl text-gray-300 mb-4"></i>
+            <h3 class="text-xl font-semibold text-gray-600 mb-2">Aucune compétence pour le moment</h3>
+            <p class="text-gray-500 mb-6">Ajoutez vos compétences techniques et professionnelles.</p>
+            <a href="{{ url_for('portfolio.add_skill') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg transition-colors">
+                <i class="fas fa-plus mr-2"></i>Ajouter une compétence
+            </a>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
